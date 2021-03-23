@@ -90,9 +90,39 @@ namespace Socialink
             // Jika memilih pencarian rekomendasi BFS
         }
 
-        void expDFS(bool[,] matriks, List<string> daftarHuruf, string a, string b)
+        void expDFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
         {
             // Jika memilih explore DFS dari a ke b
+            Stack<int> stack = new Stack<int>();
+            int jumlahNode = comboBox1.Items.Count;
+            int i = a;
+            int j = 0;
+            bool[] visited = new bool[jumlahNode];
+
+            for(int k = 0; k < jumlahNode; k++){
+                visited[k] = false;
+            }
+            stack.Push(a);
+            visited[a] = true;
+
+            while (!visited[b]){
+                if (j == jumlahNode){
+                    stack.Pop();
+                    i = stack.Peek();
+                } else if (matriks[i,j] && !visited[j]){
+                    stack.Push(j);
+                    visited[j] = true;
+                    i = j;
+                    j = 0;
+                }
+                j++;
+            }
+            
+            Stack<int> printStack = new Stack<int>(stack.ToArray());
+
+            foreach(string node in printStack){
+                Console.WriteLine(daftarHuruf[node]);
+            }
         }
 
         void expBFS(bool[,] matriks, List<string> daftarHuruf, string a, string b)
