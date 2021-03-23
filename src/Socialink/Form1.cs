@@ -36,10 +36,19 @@ namespace Socialink
                 string isifile = System.IO.File.ReadAllText(label4.Text);
 
                 // Buat daftar huruf/nama akun
-                // ...
+                List<string> daftarHuruf = new List<string>(createDaftarHuruf());
 
                 // Ubah dropdown list
-                // ...
+                foreach (var huruf in daftarHuruf)
+                {
+                    comboBox1.Items.Add(huruf);
+                    comboBox2.Items.Add(huruf);
+                }
+
+                comboBox1.SelectedIndex = 0;
+                comboBox2.SelectedIndex = 0;
+                button2.Enabled = true;
+                button3.Enabled = true;
 
                 // Buat graf
                 createGraph(isifile);
@@ -49,15 +58,48 @@ namespace Socialink
             }
         }
 
-        void DFS(string dari, string ke)
+        List<string> createDaftarHuruf()
         {
-            // Jika memilih pencarian DFS
+            string isifile = System.IO.File.ReadAllText(label4.Text);
+            List<string> daftarHuruf = new List<string>();
+            string[] isifile2 = isifile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            for (int i = 1; i < isifile2.Length; i++)
+            {
+                string[] tempstring = isifile2[i].Split(' ');
+                // Cek jika node sudah tercatat, jika belum maka add
+                if (!daftarHuruf.Contains(tempstring[0]))
+                {
+                    daftarHuruf.Add(tempstring[0]);
+                }
+                if (!daftarHuruf.Contains(tempstring[1]))
+                {
+                    daftarHuruf.Add(tempstring[1]);
+                }
+            }
+            daftarHuruf.Sort();
+            return daftarHuruf;
         }
 
-        void BFS(string dari, string ke)
+        void recDFS(bool[,] matriks, List<string> daftarHuruf)
         {
-            // Jika memilih pencarian BFS
+            // Jika memilih pencarian rekomendasi DFS
         }
+
+        void recBFS(bool[,] matriks, List<string> daftarHuruf)
+        {
+            // Jika memilih pencarian rekomendasi BFS
+        }
+
+        void expDFS(bool[,] matriks, List<string> daftarHuruf, string a, string b)
+        {
+            // Jika memilih explore DFS dari a ke b
+        }
+
+        void expBFS(bool[,] matriks, List<string> daftarHuruf, string a, string b)
+        {
+            // Jika memilih explore BFS dari a ke b
+        }
+
 
         void createGraph(string isifile)
         {
@@ -73,6 +115,7 @@ namespace Socialink
             //create a graph object 
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
+            /*
             //create the graph content
             graph.AddEdge("A", "B");
             graph.AddEdge("B", "C");
@@ -82,6 +125,14 @@ namespace Socialink
             Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
             c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
             c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
+            */
+
+            string[] isifile2 = isifile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            for(int i=1;i<isifile2.Length;i++)
+            {
+                string[] tempstring = isifile2[i].Split(' ');
+                graph.AddEdge(tempstring[0], tempstring[1]);
+            }
 
             //bind the graph to the viewer 
             viewer.Graph = graph;
@@ -96,14 +147,83 @@ namespace Socialink
             form.Show();
         }
 
+        bool[,] makeMatriks()
+        {
+            int n = comboBox1.Items.Count;
+            bool[,] matriks = new bool[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < n; j++)
+                {
+                    matriks[i,j] = false;
+                }
+            }
+
+            string isifile = System.IO.File.ReadAllText(label4.Text);
+            string[] isifile2 = isifile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+
+            List<string> daftarHuruf = new List<string>(createDaftarHuruf());
+            for (int i = 1; i < isifile2.Length; i++)
+            {
+                string[] tempstring = isifile2[i].Split(' ');
+                int idx1 = daftarHuruf.FindIndex(a => a == tempstring[0]);
+                int idx2 = daftarHuruf.FindIndex(a => a == tempstring[1]);
+
+                matriks[idx1,idx2] = true;
+                matriks[idx2,idx1] = true;
+
+            }
+
+            return matriks;
+
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
+            // Button Recommend Friends
+            bool[,] matriks = makeMatriks();
+            List<string> daftarHuruf = new List<string>(createDaftarHuruf());
 
+            if (DFSbutton.Checked)
+            {
+                // Jika DFS dipilih
+                recDFS(matriks, daftarHuruf);
+            }
+            else if(BFSbutton.Checked)
+            {
+                // Jika BFS
+                recBFS(matriks, daftarHuruf);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            // Button Explore Friends
+            bool[,] matriks = makeMatriks();
+            List<string> daftarHuruf = new List<string>(createDaftarHuruf());
+            string dari = comboBox1.Text;
+            string ke = comboBox2.Text;
 
+            // Cek apakah nilai combobox1 == combobox2
+            if(dari==ke)
+            {
+                // Gagal explore
+                MessageBox.Show("Harap pilih 2 akun yang berbeda.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                if (DFSbutton.Checked)
+                {
+                    // Jika DFS dipilih
+                    expDFS(matriks, daftarHuruf, dari, ke);
+                }
+                else if (BFSbutton.Checked)
+                {
+                    // Jika BFS
+                    expBFS(matriks, daftarHuruf, dari, ke);
+                }
+            }
+            
         }
     }
 }

@@ -86,6 +86,7 @@ namespace Socialink
             // DFSbutton
             // 
             this.DFSbutton.AutoSize = true;
+            this.DFSbutton.Checked = true;
             this.DFSbutton.Location = new System.Drawing.Point(109, 125);
             this.DFSbutton.Name = "DFSbutton";
             this.DFSbutton.Size = new System.Drawing.Size(46, 17);
@@ -107,15 +108,16 @@ namespace Socialink
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
+            this.label4.AutoEllipsis = true;
             this.label4.Location = new System.Drawing.Point(189, 95);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 13);
+            this.label4.Size = new System.Drawing.Size(202, 18);
             this.label4.TabIndex = 6;
             this.label4.Text = "< pilih file >";
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(192, 182);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(141, 23);
@@ -162,6 +164,7 @@ namespace Socialink
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(192, 251);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
@@ -185,7 +188,7 @@ namespace Socialink
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 320);
+            this.ClientSize = new System.Drawing.Size(804, 321);
             this.Controls.Add(this.teksHasil);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.comboBox2);
@@ -200,6 +203,8 @@ namespace Socialink
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Socialink";
             this.ResumeLayout(false);
