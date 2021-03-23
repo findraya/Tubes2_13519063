@@ -106,10 +106,13 @@ namespace Socialink
             visited[a] = true;
 
             while (!visited[b]){
-                if (j == jumlahNode){
-                    stack.Pop();
+                if (j == jumlahNode)
+                {
+                    j = stack.Pop();
                     i = stack.Peek();
-                } else if (matriks[i,j] && !visited[j]){
+                }
+                else if (matriks[i, j] && !visited[j])
+                {
                     stack.Push(j);
                     visited[j] = true;
                     i = j;
@@ -120,12 +123,28 @@ namespace Socialink
             
             Stack<int> printStack = new Stack<int>(stack.ToArray());
 
-            foreach(string node in printStack){
-                Console.WriteLine(daftarHuruf[node]);
+            teksHasil.Text = "Nama akun: ";
+            teksHasil.AppendText(daftarHuruf[a]);
+            teksHasil.AppendText(" dan ");
+            teksHasil.AppendText(daftarHuruf[b]);
+            teksHasil.AppendText("\n");
+            int connection = printStack.Count() - 2;
+            teksHasil.AppendText(connection.ToString());
+            teksHasil.AppendText("-degree connection\n");
+
+            foreach (int node in printStack){
+                // Console.WriteLine(daftarHuruf[node]);
+                // Tulis hasil ke textbox
+                teksHasil.AppendText(daftarHuruf[node]);
+                if(stack.Peek()!=node)
+                {
+                    teksHasil.AppendText(" -> ");
+                }
+
             }
         }
 
-        void expBFS(bool[,] matriks, List<string> daftarHuruf, string a, string b)
+        void expBFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
         {
             // Jika memilih explore BFS dari a ke b
         }
@@ -231,11 +250,11 @@ namespace Socialink
             // Button Explore Friends
             bool[,] matriks = makeMatriks();
             List<string> daftarHuruf = new List<string>(createDaftarHuruf());
-            string dari = comboBox1.Text;
-            string ke = comboBox2.Text;
+            int dari = daftarHuruf.FindIndex(a => a == comboBox1.Text);
+            int ke = daftarHuruf.FindIndex(a => a == comboBox2.Text);
 
             // Cek apakah nilai combobox1 == combobox2
-            if(dari==ke)
+            if (dari==ke)
             {
                 // Gagal explore
                 MessageBox.Show("Harap pilih 2 akun yang berbeda.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
