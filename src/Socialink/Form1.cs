@@ -158,7 +158,6 @@ namespace Socialink
             teksHasil.AppendText("-degree connection\n");
 
             foreach (int node in printStack){
-                // Console.WriteLine(daftarHuruf[node]);
                 // Tulis hasil ke textbox
                 teksHasil.AppendText(daftarHuruf[node]);
                 if(stack.Peek()!=node)
