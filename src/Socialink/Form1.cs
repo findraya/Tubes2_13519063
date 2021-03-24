@@ -374,5 +374,22 @@ namespace Socialink
             }
             
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msg = "=========\nSocialink v1.0\n=========\n\nDibuat oleh:\n\n13519063 Melita\n13519070 Mhd. Hiro Agayeff Muslio\n13519171 Fauzan Yubairi Indrayadi";
+            MessageBox.Show(msg, "About", MessageBoxButtons.OK);
+        }
+
+        private void guideToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msg = "1. Gunakan Browse untuk memilih file .txt.\n2. Untuk recommend, pilih akun lalu klik tombol Recommend Friends.\n3. Untuk explore, pilih akun kedua yang berbeda, lalu klik Explore.";
+            MessageBox.Show(msg, "Help", MessageBoxButtons.OK);
+        }
     }
 }
