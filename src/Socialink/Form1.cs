@@ -80,7 +80,62 @@ namespace Socialink
         void recFriend(bool[,] matriks, List<string> daftarHuruf, int akun)
         {
             // Jika memilih pencarian recommend friends
+            int jumlahNode = comboBox1.Items.Count;
+            int[] friend = new int[]; 
+            int[] recom = new int[jumlahNode]; 
 
+            for (int i = 0; i < jumlahNode; i++)
+            {
+                if (matriks[akun, i])
+                {
+                    friend.append(i);
+                }
+            }
+
+            for(int i = 0; i < jumlahNode; i++){
+                recom[i] = 0;
+            }
+            
+            foreach(int node in friend)
+            {
+                for (int i = 0; i < jumlahNode; i++)
+                {
+                    if (matriks[node,i] && !friend.Contains(i) && i != akun)
+                    {
+                        recom[i] += 1;
+                    }
+                }
+            }
+
+            // Cetak hasil pencarian di textbox
+            teksHasil.SelectionStart = teksHasil.Text.Length;
+            teksHasil.SelectionAlignment = HorizontalAlignment.Center;
+            teksHasil.Text = "";
+            teksHasil.AppendText("==============\n");
+            teksHasil.AppendText("Hasil Pencarian\n");
+            teksHasil.AppendText("==============\n\n");
+            teksHasil.AppendText("Daftar rekomendasi teman untuk akun ");
+            teksHasil.AppendText(akun.ToString());
+            teksHasil.AppendText(":\n");
+            for (int i = 0; i < jumlahNode; i++)
+            {
+                if (recom[i] > 0)
+                {
+                    teksHasil.AppendText("Nama akun: ");
+                    teksHasil.AppendText(daftarHuruf[i]);
+                    teksHasil.AppendText("\n");
+                    teksHasil.AppendText(recom[i].ToString());
+                    teksHasil.AppendText(" mutual friends:\n");
+                    foreach (int mutual in friend)
+                    {
+                        if (matriks[i, mutual])
+                        {
+                            teksHasil.AppendText(daftarHuruf[mutual]);
+                            teksHasil.AppendText("\n");
+                        }
+                    }
+                }
+            }
         }
 
         void expDFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
@@ -92,14 +147,16 @@ namespace Socialink
             int j = 0;
             bool[] visited = new bool[jumlahNode];
 
-            for(int k = 0; k < jumlahNode; k++){
+            for(int k = 0; k < jumlahNode; k++)
+            {
                 visited[k] = false;
             }
             stack.Push(a);
             visited[a] = true;
             bool selesai = false;
 
-            while (!visited[b] && !selesai){
+            while (!visited[b] && !selesai)
+            {
                 if (j == jumlahNode)
                 {
                     j = stack.Pop();
