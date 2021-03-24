@@ -97,13 +97,21 @@ namespace Socialink
             }
             stack.Push(a);
             visited[a] = true;
+            bool selesai = false;
 
-            while (!visited[b]){
+            while (!visited[b] && !selesai){
                 if (j == jumlahNode)
                 {
                     j = stack.Pop();
-                    i = stack.Peek();
-                    j++;
+                    if(stack.Count == 0)
+                    {
+                        selesai = true;
+                    }
+                    else
+                    {
+                        i = stack.Peek();
+                        j++;
+                    }
                 }
                 else if (matriks[i, j] && !visited[j])
                 {
@@ -117,9 +125,13 @@ namespace Socialink
                     j++;
                 }
             }
-            
+
             Stack<int> printStack = new Stack<int>(stack.ToArray());
-            createGraphToFrom(stack.ToArray(), daftarHuruf);
+
+            if (!selesai)
+            {
+                createGraphToFrom(stack.ToArray(), daftarHuruf);
+            }
 
             // Cetak hasil pencarian di textbox
             teksHasil.SelectionStart = teksHasil.Text.Length;
@@ -134,38 +146,49 @@ namespace Socialink
             teksHasil.AppendText(daftarHuruf[b]);
             teksHasil.AppendText("\n");
 
-            int connection = printStack.Count() - 2;
-            teksHasil.SelectionStart = teksHasil.Text.Length;
-            teksHasil.SelectionFont = new Font(teksHasil.Font, FontStyle.Regular);
-            teksHasil.SelectionColor = Color.SlateBlue;
-            teksHasil.AppendText(connection.ToString());
-            if(connection%10==1 && connection%100!=11)
+            if(!selesai)
             {
-                teksHasil.AppendText("st");
-            }
-            else if(connection%10==2 && connection%100!=12)
-            {
-                teksHasil.AppendText("nd");
-            }
-            else if(connection%10==3 && connection%100!=13)
-            {
-                teksHasil.AppendText("rd");
+                int connection = printStack.Count() - 2;
+                teksHasil.SelectionStart = teksHasil.Text.Length;
+                teksHasil.SelectionFont = new Font(teksHasil.Font, FontStyle.Regular);
+                teksHasil.SelectionColor = Color.SlateBlue;
+                teksHasil.AppendText(connection.ToString());
+                if (connection % 10 == 1 && connection % 100 != 11)
+                {
+                    teksHasil.AppendText("st");
+                }
+                else if (connection % 10 == 2 && connection % 100 != 12)
+                {
+                    teksHasil.AppendText("nd");
+                }
+                else if (connection % 10 == 3 && connection % 100 != 13)
+                {
+                    teksHasil.AppendText("rd");
+                }
+                else
+                {
+                    teksHasil.AppendText("th");
+                }
+                teksHasil.AppendText("-degree connection\n");
+
+                foreach (int node in printStack)
+                {
+                    // Tulis hasil ke textbox
+                    teksHasil.AppendText(daftarHuruf[node]);
+                    if (stack.Peek() != node)
+                    {
+                        teksHasil.AppendText(" → ");
+                    }
+
+                }
             }
             else
             {
-                teksHasil.AppendText("th");
+                // Tidak ketemu jalur
+                teksHasil.AppendText("Tidak ada jalur koneksi yang tersedia.\n");
+                teksHasil.AppendText("Anda harus memulai koneksi baru itu sendiri.");
             }
-            teksHasil.AppendText("-degree connection\n");
-
-            foreach (int node in printStack){
-                // Tulis hasil ke textbox
-                teksHasil.AppendText(daftarHuruf[node]);
-                if(stack.Peek()!=node)
-                {
-                    teksHasil.AppendText(" → ");
-                }
-
-            }
+            
         }
 
         void expBFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
