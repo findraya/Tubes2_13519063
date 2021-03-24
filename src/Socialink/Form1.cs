@@ -26,6 +26,10 @@ namespace Socialink
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                // Clear combobox
+                comboBox1.Items.Clear();
+                comboBox2.Items.Clear();
+
                 // Hapus hasil sebelumnya
                 teksHasil.Text = "";
 
@@ -81,14 +85,14 @@ namespace Socialink
         {
             // Jika memilih pencarian recommend friends
             int jumlahNode = comboBox1.Items.Count;
-            int[] friend = new int[]; 
+            List<int> friend = new List<int>(); 
             int[] recom = new int[jumlahNode]; 
 
             for (int i = 0; i < jumlahNode; i++)
             {
                 if (matriks[akun, i])
                 {
-                    friend.append(i);
+                    friend.Add(i);
                 }
             }
 
@@ -115,27 +119,42 @@ namespace Socialink
             teksHasil.AppendText("Hasil Pencarian\n");
             teksHasil.AppendText("==============\n\n");
             teksHasil.AppendText("Daftar rekomendasi teman untuk akun ");
-            teksHasil.AppendText(akun.ToString());
+            teksHasil.AppendText(daftarHuruf[akun]);
             teksHasil.AppendText(":\n");
-            for (int i = 0; i < jumlahNode; i++)
+
+            int maks = recom.Max();
+
+            while(maks!=0)
             {
-                if (recom[i] > 0)
+                for (int i = 0; i < jumlahNode; i++)
                 {
-                    teksHasil.AppendText("Nama akun: ");
-                    teksHasil.AppendText(daftarHuruf[i]);
-                    teksHasil.AppendText("\n");
-                    teksHasil.AppendText(recom[i].ToString());
-                    teksHasil.AppendText(" mutual friends:\n");
-                    foreach (int mutual in friend)
+                    if (recom[i] == maks)
                     {
-                        if (matriks[i, mutual])
+                        teksHasil.AppendText("\nNama akun: ");
+                        teksHasil.AppendText(daftarHuruf[i]);
+                        teksHasil.AppendText("\n");
+                        teksHasil.AppendText(recom[i].ToString());
+                        teksHasil.AppendText(" mutual friend");
+                        if(recom[i]>1)
                         {
-                            teksHasil.AppendText(daftarHuruf[mutual]);
-                            teksHasil.AppendText("\n");
+                            teksHasil.AppendText("s");
                         }
+                        teksHasil.AppendText(":\n");
+                        foreach (int mutual in friend)
+                        {
+                            if (matriks[i, mutual])
+                            {
+                                teksHasil.AppendText(daftarHuruf[mutual]);
+                                teksHasil.AppendText("\n");
+                            }
+                        }
+
+                        recom[i] = 0;
                     }
                 }
+                maks = recom.Max();
             }
+            
         }
 
         void expDFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
