@@ -177,12 +177,13 @@ namespace Socialink
             // 
             this.teksHasil.BackColor = System.Drawing.SystemColors.Window;
             this.teksHasil.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.teksHasil.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.teksHasil.Location = new System.Drawing.Point(407, 90);
             this.teksHasil.Name = "teksHasil";
             this.teksHasil.ReadOnly = true;
             this.teksHasil.Size = new System.Drawing.Size(349, 184);
             this.teksHasil.TabIndex = 14;
-            this.teksHasil.Text = "< hasil >";
+            this.teksHasil.Text = "Hasil Pencarian:";
             // 
             // Form1
             // 
