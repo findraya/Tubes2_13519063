@@ -45,6 +45,9 @@ iii. Cara Menggunakan
                      Berikutnya ditulis nama yang akan menjadi simpul
                      dengan temannya yang dipisah dengan satu spasi.
                      Koneksi berikutnya ditulis setelah newline.
+                     Setiap koneksi hanya dituliskan satu kali, jadi
+                     jika A dan B berteman, cukup tuliskan A B atau
+                     B A, tapi tidak keduanya.)
                      
      >> Pengaturan
         Terdapat opsi untuk memilih algoritma yang digunakan. Pilihlah
