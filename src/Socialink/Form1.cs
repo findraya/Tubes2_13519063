@@ -206,7 +206,7 @@ namespace Socialink
 
             if (!selesai)
             {
-                createGraphToFrom(stack.ToArray(), daftarHuruf);
+                createGraphToFrom(printStack.ToArray(), daftarHuruf);
             }
 
             // Cetak hasil pencarian di textbox
@@ -270,12 +270,129 @@ namespace Socialink
         void expBFS(bool[,] matriks, List<string> daftarHuruf, int a, int b)
         {
             // Jika memilih explore BFS dari a ke b
+            Queue<int> q = new Queue<int>();
+            q.Enqueue(a);
+            int jumlahNode = comboBox1.Items.Count;
+            bool[] visited = new bool[jumlahNode];
+
+            // catatan node mana sebelum mencapai node tersebut
+            int[] prevroute = new int[jumlahNode];
+            for(int i =0;i<jumlahNode;i++)
+            {
+                prevroute[i] = -1;
+            }
+            
+            visited[a] = true;
+            bool temu = false;
+
+            while(q.Count!=0 && !temu)
+            {
+                int current = q.Dequeue();
+                Console.Write("Currently checking: ");
+                Console.WriteLine(daftarHuruf[current]);
+                if (current!=b)
+                {
+                    // Jika current node bukan yang dicari
+                    for (int i = 0; i < jumlahNode; i++)
+                    {
+                        // bangkitkan semua simpul tetangga
+                        if (!visited[i] && matriks[i, current])
+                        {
+                            Console.Write("Adding to queue: ");
+                            Console.WriteLine(daftarHuruf[i]);
+                            visited[i] = true;
+                            q.Enqueue(i);
+                            prevroute[i] = current;
+
+                        }
+                    }
+                }
+                else
+                {
+                    // current = b
+                    temu = true;
+                }
+                
+            }
+
+            // Cetak hasil pencarian di textbox
+            teksHasil.SelectionStart = teksHasil.Text.Length;
+            teksHasil.SelectionAlignment = HorizontalAlignment.Center;
+            teksHasil.Text = "";
+            teksHasil.AppendText("==============\n");
+            teksHasil.AppendText("Hasil Pencarian\n");
+            teksHasil.AppendText("==============\n\n");
+            teksHasil.AppendText("Nama akun: ");
+            teksHasil.AppendText(daftarHuruf[a]);
+            teksHasil.AppendText(" dan ");
+            teksHasil.AppendText(daftarHuruf[b]);
+            teksHasil.AppendText("\n");
+
+            // Ketemu atau semua visited dan tidak ketemu
+            if (temu)
+            {
+                // jika ketemu
+                int goal = b;
+                Stack<int> route = new Stack<int>();
+                while(goal!=a)
+                {
+                    route.Push(goal);
+                    goal = prevroute[goal];
+                }
+                route.Push(goal);
+
+                // buat graf
+                createGraphToFrom(route.ToArray(), daftarHuruf);
+
+                // cetak hasil
+                int connection = route.Count() - 2;
+                teksHasil.SelectionStart = teksHasil.Text.Length;
+                teksHasil.SelectionFont = new Font(teksHasil.Font, FontStyle.Regular);
+                teksHasil.SelectionColor = Color.SlateBlue;
+                teksHasil.AppendText(connection.ToString());
+                if (connection % 10 == 1 && connection % 100 != 11)
+                {
+                    teksHasil.AppendText("st");
+                }
+                else if (connection % 10 == 2 && connection % 100 != 12)
+                {
+                    teksHasil.AppendText("nd");
+                }
+                else if (connection % 10 == 3 && connection % 100 != 13)
+                {
+                    teksHasil.AppendText("rd");
+                }
+                else
+                {
+                    teksHasil.AppendText("th");
+                }
+                teksHasil.AppendText("-degree connection\n");
+
+                int x = 0;
+                while(route.Count!=0)
+                {
+                    x = route.Pop();
+                    teksHasil.AppendText(daftarHuruf[x]);
+                    if (route.Count>=1)
+                    {
+                        teksHasil.AppendText(" → ");
+                    }
+                }
+
+            }
+            else
+            {
+                // jika tidak ketemu
+                teksHasil.AppendText("Tidak ada jalur koneksi yang tersedia.\n");
+                teksHasil.AppendText("Anda harus memulai koneksi baru itu sendiri.");
+            }
+
         }
 
         void createGraphToFrom(int[] arr, List<string> daftarHuruf)
         {
             System.Windows.Forms.Form form = new System.Windows.Forms.Form();
-            string judul = "Graf Explore " + daftarHuruf[arr[arr.Length - 1]] + " ke " + daftarHuruf[arr[0]];
+            string judul = "Graf Explore " + daftarHuruf[arr[0]] + " ke " + daftarHuruf[arr[arr.Length - 1]]; 
             form.Text = judul;
 
             //create a viewer object 
@@ -337,18 +454,6 @@ namespace Socialink
             //create a graph object 
             Microsoft.Msagl.Drawing.Graph graph = new Microsoft.Msagl.Drawing.Graph("graph");
 
-            /*
-            //create the graph content
-            graph.AddEdge("A", "B");
-            graph.AddEdge("B", "C");
-            graph.AddEdge("A", "C").Attr.Color = Microsoft.Msagl.Drawing.Color.Green;
-            graph.FindNode("A").Attr.FillColor = Microsoft.Msagl.Drawing.Color.Magenta;
-            graph.FindNode("B").Attr.FillColor = Microsoft.Msagl.Drawing.Color.MistyRose;
-            Microsoft.Msagl.Drawing.Node c = graph.FindNode("C");
-            c.Attr.FillColor = Microsoft.Msagl.Drawing.Color.PaleGreen;
-            c.Attr.Shape = Microsoft.Msagl.Drawing.Shape.Diamond;
-            */
-
             string[] isifile2 = isifile.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             for(int i=1;i<isifile2.Length;i++)
             {
@@ -405,7 +510,6 @@ namespace Socialink
                 
             }
 
-            
 
             return matriks;
 
