@@ -1,0 +1,24 @@
+23
+A B
+B D
+B C
+C A
+A H
+H I
+I K
+K L
+L A
+A F
+F B
+F D
+B K
+L I
+G A
+A N
+P O
+Z Y
+Y P
+Y O
+Z X
+X V
+V L
