@@ -122,7 +122,13 @@ namespace Socialink
             teksHasil.AppendText(daftarHuruf[akun]);
             teksHasil.AppendText(":\n");
 
+
             int maks = recom.Max();
+
+            if(maks == 0)
+            {
+                teksHasil.AppendText("Tidak ada rekomendasi teman untuk akun tersebut. :(");
+            }
 
             while(maks!=0)
             {
