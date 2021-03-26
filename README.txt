@@ -33,7 +33,7 @@ iii. Cara Menggunakan
         
      >> Format File Input
         File input ditulis dengan format seperti contoh berikut.
-        5
+        6
         Budi Siti
         Doni Eko
         Siti Eko
