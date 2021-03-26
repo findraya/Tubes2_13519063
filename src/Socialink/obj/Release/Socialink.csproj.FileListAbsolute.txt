@@ -1,0 +1,15 @@
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\Socialink.exe.config
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\Socialink.exe
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\Socialink.pdb
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\AutomaticGraphLayout.dll
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\AutomaticGraphLayout.Drawing.dll
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\Microsoft.Msagl.GraphViewerGdi.dll
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\bin\Release\Microsoft.Msagl.WpfGraphControl.dll
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.csprojAssemblyReference.cache
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.Form1.resources
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.Properties.Resources.resources
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.csproj.GenerateResource.cache
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.csproj.CoreCompileInputs.cache
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.csproj.CopyComplete
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.exe
+E:\00\Kuliah\Sem 4\Strategi Algoritma\Tugas Besar\Tubes 2 - Friends Graph\Tubes2_13519063\src\Socialink\obj\Release\Socialink.pdb
