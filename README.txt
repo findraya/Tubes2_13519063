@@ -10,10 +10,14 @@ i.   Penjelasan Singkat Algortima
         mana yang merupakan mutual friend. Kemudian, akun-akun
         tersebut akan diurutkan dan ditampilkan hasilnya.
      >> Untuk fitur explore, terdapat 2 algoritma, yaitu BFS
-        dan DFS. Untuk keduanya, node dicari berdasarkan urutan
-        alfabetis. Pada DFS, program akan memeriksa node anak
-        terlebih dahulu, sedangkan pada BFS, program akan
-        memeriksa node tetangga terlebih dahulu.
+        dan DFS. Untuk keduanya, simpul dicari berdasarkan urutan
+        alfabetis. Pada DFS, program akan memeriksa satu simpul
+        yang bertetangga dengan simpul awal terlebih dahulu, misal
+        simpul w, lalu mengulangi proses pencariannya dengan
+        mengunjungi tetangga simpul w. Pada BFS, program akan
+        mengunjungi semua simpul bertetangga terlebih dahulu,
+        lalu mengunjungi semua simpul yang bertetangga dengan
+        simpul yang dikunjungi sebelumnya.
 
 
 ii.  Requirement Program
@@ -38,7 +42,7 @@ iii. Cara Menggunakan
         Gio Heri
         
         (Keterangan: Angka paling atas adalah jumlah sisi pada graf.
-                     Berikutnya ditulis nama yang akan menjadi node
+                     Berikutnya ditulis nama yang akan menjadi simpul
                      dengan temannya yang dipisah dengan satu spasi.
                      Koneksi berikutnya ditulis setelah newline.
                      
